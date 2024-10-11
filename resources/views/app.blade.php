@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html
+  lang="en"
+  class="light-style layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Dashboard | Umroh</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+      
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+  </head>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Sidebar -->
+        @include('includes.sidebar')
+        <!-- / Sidebar -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Header -->
+            @include('includes.header')
+          <!-- / Header -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+            
+
+            @yield('content')
+            <!-- / Content -->
+
+            <!-- Footer -->
+            @include('includes.footer')
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ asset('assets/vendor/js/sweatealert.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <!-- Page JS -->
+    <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+    <script>
+      (() => {
+      'use strict'
+    
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.needs-validation')
+    
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+    
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+    </script>
+    {{-- User Delete --}}
+
+    
+<script type="text/javascript">
+  
+$(document).ready(function() {
+    const data = {
+        "provinsi": {
+            "1": {
+                "nama": "Jawa Barat",
+                "kota": {
+                    "1": {
+                        "nama": "Bandung",
+                        "kecamatan": {
+                            "1": {
+                                "nama": "Coblong",
+                                "desa": {
+                                    "1": "Desa A",
+                                    "2": "Desa B"
+                                }
+                            },
+                            "2": {
+                                "nama": "Cibeunying",
+                                "desa": {
+                                    "1": "Desa C",
+                                    "2": "Desa D"
+                                }
+                            }
+                        }
+                    },
+                    "2": {
+                        "nama": "Bogor",
+                        "kecamatan": {
+                            "1": {
+                                "nama": "Bogor Selatan",
+                                "desa": {
+                                    "1": "Desa E",
+                                    "2": "Desa F"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    // Populate province dropdown
+    $.each(data.provinsi, function(key, provinsi) {
+        $('#provinsi').append(new Option(provinsi.nama, key));
+    });
+
+    // On province change
+    $('#provinsi').change(function() {
+        var provinsiId = $(this).val();
+        var kotaSelect = $('#kab_kota').empty().append(new Option('Pilih Kota...', '')).prop('disabled', false);
+        var kecamatanSelect = $('#kecamatan').empty().append(new Option('Pilih Kecamatan...', '')).prop('disabled', true);
+        var desaSelect = $('#kelurahan').empty().append(new Option('Pilih Desa...', '')).prop('disabled', true);
+        
+        if (provinsiId) {
+            var kotaData = data.provinsi[provinsiId].kota;
+            $.each(kotaData, function(key, kota) {
+                kotaSelect.append(new Option(kota.nama, key));
+            });
+        }
+    });
+
+    // On city change
+    $('#kab_kota').change(function() {
+        var provinsiId = $('#provinsi').val();
+        var kotaId = $(this).val();
+        var kecamatanSelect = $('#kecamatan').empty().append(new Option('Pilih Kecamatan...', '')).prop('disabled', false);
+        var desaSelect = $('#kelurahan').empty().append(new Option('Pilih Desa...', '')).prop('disabled', true);
+        
+        if (kotaId) {
+            var kecamatanData = data.provinsi[provinsiId].kota[kotaId].kecamatan;
+            $.each(kecamatanData, function(key, kecamatan) {
+                kecamatanSelect.append(new Option(kecamatan.nama, key));
+            });
+        }
+    });
+
+    // On subdistrict change
+    $('#kecamatan').change(function() {
+        var provinsiId = $('#provinsi').val();
+        var kotaId = $('#kab_kota').val();
+        var kecamatanId = $(this).val();
+        var desaSelect = $('#kelurahan').empty().append(new Option('Pilih Desa...', '')).prop('disabled', false);
+
+        if (kecamatanId) {
+            var desaData = data.provinsi[provinsiId].kota[kotaId].kecamatan[kecamatanId].desa;
+            $.each(desaData, function(key, desa) {
+                desaSelect.append(new Option(desa, key));
+            });
+        }
+    });
+});
+
+</script>
+    <script type="text/javascript">
+
+
+      $(document).ready(function () {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+        
+          $('body').on('click', '#delete-user', function () {
+            var galeriURL = $(this).data('url');
+            var trObj = $(this);
+
+            swal({
+              title: "Apakah Anda yakin?",
+              text: "User ini akan dihapus secara permanen!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                $.ajax({
+                  url: galeriURL,
+                  type: 'DELETE',
+                  dataType: 'json',
+                  success: function(data) {
+                    swal("Data User Berhasil dihapus!", {
+                      icon: "success",
+                    });
+                    trObj.parents("tr").remove();
+                  },
+                  error: function(data) {
+                    swal("Oops!", "Terjadi kesalahan!", "error");
+                  }
+                });
+              } else {
+                swal("Penghapusan user dibatalkan!", {icon: "info"});
+              }
+            });
+
+          });
+      });
+    </script>
+    {{-- Galeri Delete --}}
+    <script type="text/javascript">
+      $(document).ready(function () {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+        
+          $('body').on('click', '.delete-galeri', function () {
+            var galeriURL = $(this).data('url');
+            var anchorObj = $(this);
+    
+            swal({
+              title: "Apakah Anda yakin?",
+              text: "Gambar ini akan dihapus secara permanen!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                $.ajax({
+                  url: galeriURL,
+                  type: 'DELETE',
+                  dataType: 'json',
+                  success: function(data) {
+                    swal("Gambar berhasil dihapus!", {
+                      icon: "success",
+                    });
+                    anchorObj.parents(".gal").remove();
+                  },
+                  error: function(data) {
+                    swal("Oops!", "Terjadi kesalahan!", "error");
+                  }
+                });
+              } else {
+                swal("Penghapusan Gambar dibatalkan!", {icon: "info"});
+              }
+            });
+    
+          });
+      });
+    </script>
+    {{-- Paket  Delete --}}
+    <script type="text/javascript">
+      $(document).ready(function () {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+        
+          $('body').on('click', '#delete-paket', function () {
+            var galeriURL = $(this).data('url');
+            var anchorObj = $(this);
+    
+            swal({
+              title: "Apakah Anda yakin?",
+              text: "Gambar ini akan dihapus secara permanen!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                $.ajax({
+                  url: galeriURL,
+                  type: 'DELETE',
+                  dataType: 'json',
+                  success: function(data) {
+                    swal("Gambar berhasil dihapus!", {
+                      icon: "success",
+                    });
+                    anchorObj.parents("tr").remove();
+                  },
+                  error: function(data) {
+                    swal("Oops!", "Terjadi kesalahan!", "error");
+                  }
+                });
+              } else {
+                swal("Penghapusan Gambar dibatalkan!", {icon: "info"});
+              }
+            });
+    
+          });
+      });
+    </script>
+    {{-- Umroh Delete --}}
+    <script type="text/javascript">
+      $(document).ready(function () {
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+        
+          $('body').on('click', '#delete-umroh', function () {
+            var umrohURL = $(this).data('url');
+            var anchorObj = $(this);
+    
+            swal({
+              title: "Apakah Anda yakin?",
+              text: "Data Umroh ini akan dihapus secara permanen!",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                $.ajax({
+                  url: umrohURL,
+                  type: 'DELETE',
+                  dataType: 'json',
+                  success: function(data) {
+                    swal("Data Umroh berhasil dihapus!", {
+                      icon: "success",
+                    });
+                    anchorObj.parents("tr").remove();
+                  },
+                  error: function(data) {
+                    swal("Oops!", "Terjadi kesalahan!", "error");
+                  }
+                });
+              } else {
+                swal("Penghapusan Data Umroh dibatalkan!", {icon: "info"});
+              }
+            });
+    
+          });
+      });
+    </script>
+    {{-- Pendaftran Delete --}}
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('body').on('click', '#delete-daftar', function () {
+            var daftarURL = $(this).data('url');
+            var anchorObj = $(this);
+
+            swal({
+                title: "Apakah Anda yakin?",
+                text: "Data Pendaftar ini akan dihapus secara permanen!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: daftarURL,
+                        type: 'DELETE',
+                        dataType: 'json',
+                        success: function(data) {
+                            swal("Data Pendaftar berhasil dihapus!", {
+                                icon: "success",
+                            }).then((result) => {
+                                // Refresh halaman setelah menghapus pendaftar
+                                location.reload();
+                            });
+                        },
+                        error: function(data) {
+                            swal("Oops!", "Terjadi kesalahan!", "error");
+                        }
+                    });
+                } else {
+                    swal("Penghapusan Data Pendaftar dibatalkan!", {icon: "info"});
+                }
+            });
+
+        });
+    });
+    </script>
+
+    <!-- Place this tag in your head or just before your close body tag. --> 
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
